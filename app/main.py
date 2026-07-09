@@ -1,42 +1,43 @@
-from models.event import OperationalEvent
+from fastapi import FastAPI
+from app.models.event import OperationalEvent
 
-# Event 1
-event_1 = OperationalEvent(
-    event_id="EVT001",
-    member_id="MEM1001",
-    department="Lab",
-    issue="Sample Collection Delay",
-    event_description="No one came for sample collection. Member has been fasting since morning."
-)
-
-# Event 2
-event_2 = OperationalEvent(
-    event_id="EVT002",
-    member_id="MEM1002",
-    department="Pharmacy",
-    issue="Medicine Out of Stock",
-    event_description="Requested medicine is currently unavailable."
-)
-
-# Event 3
-event_3 = OperationalEvent(
-    event_id="EVT003",
-    member_id="MEM1003",
-    department="OPD",
-    issue="Cashless Denied",
-    event_description="Hospital denied cashless consultation for the member."
+# Create the FastAPI application
+app = FastAPI(
+    title="Healthcare Operations AI Assistant",
+    description="First API for receiving healthcare operational events.",
+    version="1.0"
 )
 
 
-events = [event_1, event_2, event_3]
+@app.get("/")
+def home():
+    return {
+        "message": "Healthcare Operations AI Assistant is running!"
+    }
 
 
-for event in events:
-    print("----------------------------")
-    print(f"Event ID      : {event.event_id}")
-    print(f"Member ID     : {event.member_id}")
-    print(f"Department    : {event.department}")
-    print(f"Issue         : {event.issue}")
-    print(f"Description   : {event.event_description}")
-    print(f"Priority      : {event.priority}")
-    print(f"Status        : {event.status}")
+@app.post("/events")
+def create_event(event: dict):
+
+    # Create an OperationalEvent object
+    operational_event = OperationalEvent(
+        event_id=event["event_id"],
+        member_id=event["member_id"],
+        department=event["department"],
+        issue=event["issue"],
+        event_description=event["event_description"]
+    )
+
+    # Return the event as JSON
+    return {
+        "message": "Event received successfully",
+        "event": {
+            "event_id": operational_event.event_id,
+            "member_id": operational_event.member_id,
+            "department": operational_event.department,
+            "issue": operational_event.issue,
+            "event_description": operational_event.event_description,
+            "priority": operational_event.priority,
+            "status": operational_event.status
+        }
+    }
