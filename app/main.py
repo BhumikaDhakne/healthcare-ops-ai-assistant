@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.models.event import OperationalEvent
+from app.schemas.event_schema import EventRequest
 
 # Create the FastAPI application
 app = FastAPI(
@@ -17,15 +18,15 @@ def home():
 
 
 @app.post("/events")
-def create_event(event: dict):
+def create_event(event: EventRequest):
 
     # Create an OperationalEvent object
     operational_event = OperationalEvent(
-        event_id=event["event_id"],
-        member_id=event["member_id"],
-        department=event["department"],
-        issue=event["issue"],
-        event_description=event["event_description"]
+        event_id=event.event_id,
+        member_id=event.member_id,
+        department=event.department,
+        issue=event.issue,
+        event_description=event.event_description
     )
 
     # Return the event as JSON
