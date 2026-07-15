@@ -52,16 +52,6 @@
 
 ## US-006
 
-**As an** Accountant
-
-**I want to** identify mismatches between invoices and healthcare service requests
-
-**So that** I can resolve billing discrepancies quickly and accurately.
-
----
-
-## US-007
-
 **As an** Operations Manager
 
 **I want to** receive AI-powered recommendations on operational bottlenecks and resource allocation
@@ -70,7 +60,7 @@
 
 ---
 
-## US-008
+## US-007
 
 **As a** Support Executive
 
@@ -80,7 +70,7 @@
 
 ---
 
-## US-009
+## US-008
 
 **As an** Operations Manager
 
@@ -90,7 +80,7 @@
 
 ---
 
-## US-010
+## US-009
 
 **As an** Operations Manager
 
