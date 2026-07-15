@@ -17,7 +17,7 @@ def home():
     }
 
 
-@app.post("/events")
+@app.post("/operational-events")
 def create_event(event: EventRequest):
 
     # Create an OperationalEvent object

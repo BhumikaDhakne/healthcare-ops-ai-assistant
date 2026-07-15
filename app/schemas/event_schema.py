@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class EventRequest(BaseModel):
     """
-    Simple request model for event data.
+    Request model for creating a healthcare operational event.
 
     This is beginner-friendly and only checks that the main event fields
     are provided as non-empty text.
