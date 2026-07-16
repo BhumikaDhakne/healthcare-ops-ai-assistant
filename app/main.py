@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from app.models.event import OperationalEvent
 from app.schemas.event_schema import EventRequest
+from app.services.ai_service import AIService
 
 # Create the FastAPI application
 app = FastAPI(
@@ -29,8 +30,11 @@ def create_event(event: EventRequest):
         event_description=event.event_description
     )
 
+    ai_service = AIService()
+    ai_response = ai_service.analyze_event(operational_event)
+
     # Return the event as JSON
-    return {
+    '''return {
         "message": "Event received successfully",
         "event": {
             "event_id": operational_event.event_id,
@@ -42,3 +46,10 @@ def create_event(event: EventRequest):
             "status": operational_event.status
         }
     }
+  '''
+    return {
+    "message": "Operational event analyzed successfully",
+    "analysis": ai_response
+    }
+
+
