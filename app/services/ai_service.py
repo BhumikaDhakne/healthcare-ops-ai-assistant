@@ -1,9 +1,28 @@
 from app.models.event import OperationalEvent 
 from app.schemas.ai_response_schema import AIResponse 
+from app.prompts.user_prompt import build_user_prompt
+from app.prompts.system_prompt import SYSTEM_PROMPT
 
 class AIService:
     def analyze_event(self, event: OperationalEvent) -> AIResponse:
+        system_prompt = SYSTEM_PROMPT
+        user_prompt = build_user_prompt(event)
+        print(system_prompt) #demo
+        print(user_prompt) #demo
+
         return AIResponse(
+        summary="Demo Summary",
+        business_impact="Demo Impact",
+        priority="High",
+        analysis="Demo Analysis",
+        recommended_actions=[
+            "Action 1",
+        "Action 2"
+    ]
+)
+
+
+        '''return AIResponse(
             summary="Member appointment scheduling issue requires timely follow-up.",
             business_impact=(
                 "The delay may disrupt continuity of care, increase call-center "
@@ -22,4 +41,5 @@ class AIService:
                 "Escalate to care coordination if an appointment cannot be scheduled promptly.",
                 "Document the resolution and notify the member of the next steps.",
             ],
-        )
+        )'''
+

@@ -30,10 +30,13 @@ def create_event(event: EventRequest):
         event_description=event.event_description
     )
 
-    ai_service = AIService()
-    ai_response = ai_service.analyze_event(operational_event)
+    ai_service = AIService() #We used this to delegate work to AI service which is to analyze the operational event and provide ai responses
+    ai_response = ai_service.analyze_event(operational_event)  # ai_response is a variable that is storing the response
+        #we created obj ai_service and called the analyze_event fn of class AIService 
+        #and provided the data which was operational_event(obj of OperationalEvent Class)
 
-    # Return the event as JSON
+
+    # Return the event as JSON and we have commented this as we don't need it anymore // just kept it for knowledhe purpose
     '''return {
         "message": "Event received successfully",
         "event": {
@@ -47,9 +50,7 @@ def create_event(event: EventRequest):
         }
     }
   '''
-    return {
-    "message": "Operational event analyzed successfully",
-    "analysis": ai_response
-    }
+    return ai_response
+    
 
 
