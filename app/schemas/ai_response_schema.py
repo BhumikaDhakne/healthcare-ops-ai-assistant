@@ -7,4 +7,4 @@ class AIResponse(BaseModel):
     business_impact:str
     priority:str
     analysis:str
-    recommended_actions:list
+    recommended_actions:list[str]

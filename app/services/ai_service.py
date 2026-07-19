@@ -3,11 +3,35 @@ from app.schemas.ai_response_schema import AIResponse
 from app.prompts.user_prompt import build_user_prompt
 from app.prompts.system_prompt import SYSTEM_PROMPT
 
+import os
+from dotenv import load_dotenv
+from openai import OpenAI
+
+load_dotenv()
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 class AIService:
     def analyze_event(self, event: OperationalEvent) -> AIResponse:
         system_prompt = SYSTEM_PROMPT
         user_prompt = build_user_prompt(event)
-        print(system_prompt) #demo
+
+        response = client.responses.parse(
+            model= "gpt-4.1-mini",
+            input= [
+                {   "role": "system",
+                    "content": system_prompt},
+                {   "role": "user",
+                    "content": user_prompt                     
+                }
+            ],
+            text_format= AIResponse
+        )
+
+        return response.output_parsed
+    
+
+        '''print(system_prompt) #demo
         print(user_prompt) #demo
 
         return AIResponse(
@@ -22,7 +46,7 @@ class AIService:
 )
 
 
-        '''return AIResponse(
+        return AIResponse(
             summary="Member appointment scheduling issue requires timely follow-up.",
             business_impact=(
                 "The delay may disrupt continuity of care, increase call-center "

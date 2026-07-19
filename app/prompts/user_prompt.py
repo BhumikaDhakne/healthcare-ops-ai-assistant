@@ -8,7 +8,7 @@ Department : {event.department}
 Issue : {event.issue}
 Event Description : {event.event_description}
 
-Please provide:
+Based on the operational event above, provide the following:
 - Summary
 - Business Impact
 - Priority
