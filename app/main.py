@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from app.models.event import OperationalEvent
 from app.schemas.event_schema import EventRequest
 from app.services.ai_service import AIService
+from fastapi import HTTPException
+from app.exceptions import AIServiceError
 
 # Create the FastAPI application
 app = FastAPI(
@@ -31,12 +33,23 @@ def create_event(event: EventRequest):
     )
 
     ai_service = AIService() #We used this to delegate work to AI service which is to analyze the operational event and provide ai responses
-    ai_response = ai_service.analyze_event(operational_event)  # ai_response is a variable that is storing the response
+    try: 
+        ai_response = ai_service.analyze_event(operational_event)  # ai_response is a variable that is storing the response
         #we created obj ai_service and called the analyze_event fn of class AIService 
         #and provided the data which was operational_event(obj of OperationalEvent Class)
 
+        return ai_response
+    except: AIServiceError
+    raise HTTPException(
+    status_code=503,
+    detail="AI service is temporarily unavailable."
+    )
 
-    # Return the event as JSON and we have commented this as we don't need it anymore // just kept it for knowledhe purpose
+
+
+
+
+   # Return the event as JSON and we have commented this as we don't need it anymore // just kept it for knowledhe purpose
     '''return {
         "message": "Event received successfully",
         "event": {
@@ -50,7 +63,3 @@ def create_event(event: EventRequest):
         }
     }
   '''
-    return ai_response
-    
-
-

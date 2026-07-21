@@ -5,7 +5,7 @@ from app.prompts.system_prompt import SYSTEM_PROMPT
 
 import os
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import OpenAI, OpenAIError
 
 load_dotenv()
 
@@ -15,8 +15,8 @@ class AIService:
     def analyze_event(self, event: OperationalEvent) -> AIResponse:
         system_prompt = SYSTEM_PROMPT
         user_prompt = build_user_prompt(event)
-
-        response = client.responses.parse(
+        try:
+            response = client.responses.parse(
             model= "gpt-4.1-mini",
             input= [
                 {   "role": "system",
@@ -27,8 +27,13 @@ class AIService:
             ],
             text_format= AIResponse
         )
+            return response.output_parsed
+        except OpenAIError as e:
+            print(type(e))
+            print(e)
+            raise 
 
-        return response.output_parsed
+
     
 
         '''print(system_prompt) #demo
