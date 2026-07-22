@@ -8,3 +8,6 @@ class AIResponse(BaseModel):
     priority:str
     analysis:str
     recommended_actions:list[str]
+    owner_team: str
+    escalation_required: bool
+    escalation_reason: str

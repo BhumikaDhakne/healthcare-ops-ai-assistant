@@ -2,6 +2,7 @@ from app.models.event import OperationalEvent
 from app.schemas.ai_response_schema import AIResponse 
 from app.prompts.user_prompt import build_user_prompt
 from app.prompts.system_prompt import SYSTEM_PROMPT
+from app.exceptions import AIServiceError
 
 import os
 from dotenv import load_dotenv
@@ -29,9 +30,7 @@ class AIService:
         )
             return response.output_parsed
         except OpenAIError as e:
-            print(type(e))
-            print(e)
-            raise 
+            raise AIServiceError("AI Services Failed") from e
 
 
     
