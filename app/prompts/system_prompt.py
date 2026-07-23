@@ -37,6 +37,7 @@ Always return the response using the following structure:
 8. Escalation Reason
 9. Category
 10. Subcategory
+11. Confidence Score
 
 Business Rules:
 
@@ -134,6 +135,20 @@ Quality Assurance
 
 Choose ONLY one category and one matching subcategory.
 Do not invent new values.
+
+Confidence Score:
+
+Return an integer between 0 and 100 representing your confidence in the analysis.
+
+Guidelines:
+
+- 90–100: Event is clear with sufficient operational details.
+- 70–89: Most information is available but minor ambiguity exists.
+- 50–69: Important details are missing, reducing confidence.
+- Below 50: Insufficient information for reliable analysis.
+
+Return only an integer.
+Do not include '%' or decimal values.
 
 General Rules:
 

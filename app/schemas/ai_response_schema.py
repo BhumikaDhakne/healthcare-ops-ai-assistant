@@ -13,3 +13,4 @@ class AIResponse(BaseModel):
     escalation_reason: str
     category: str
     subcategory: str
+    confidence_score: int
