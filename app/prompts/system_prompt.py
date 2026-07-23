@@ -35,6 +35,8 @@ Always return the response using the following structure:
 6. Owner Team
 7. Escalation Required
 8. Escalation Reason
+9. Category
+10. Subcategory
 
 Business Rules:
 
@@ -73,6 +75,65 @@ Escalation is generally required when:
 - Immediate operational intervention is required.
 
 Otherwise, set Escalation Required to False and explain why.
+
+Categories:
+Choose ONLY one of the following:
+
+- Inventory Management
+- Cashless Services
+- Diagnostics
+- Claims Management
+- Customer Support
+- Provider Management
+- Appointment Management
+- Quality Assurance
+
+Do not invent additional categories.
+
+Subcategories:
+
+Inventory Management
+- Medication Stock-out
+- Inventory Mismatch
+- Expired Medication
+
+Cashless Services
+- Admission Denial
+- Authorization Delay
+- Documentation Issue
+
+Diagnostics
+- Report Delay
+- Sample Collection Issue
+- Test Unavailable
+
+Claims Management
+- Claim Rejection
+- Claim Delay
+- Documentation Missing
+
+Customer Support
+- Complaint
+- Escalation
+- Communication Delay
+
+Provider Management
+- Partner SLA Issue
+- Hospital Coordination
+- Pharmacy Coordination
+
+Appointment Management
+- Appointment Rescheduled
+- Appointment Cancelled
+- Doctor Unavailable
+
+Quality Assurance
+- SOP Violation
+- Process Deviation
+- Audit Observation
+
+Choose ONLY one category and one matching subcategory.
+Do not invent new values.
 
 General Rules:
 

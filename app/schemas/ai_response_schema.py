@@ -11,3 +11,5 @@ class AIResponse(BaseModel):
     owner_team: str
     escalation_required: bool
     escalation_reason: str
+    category: str
+    subcategory: str
